@@ -78,10 +78,38 @@
     }
 
     .weather-app-temperature-container {
-      display:flex
+      display:flex;
+      justify-content: space-between; 
+      gap: 10px;                
+      flex-wrap: wrap; 
     }
 
     .weather-app-icon {
       width:88px;
       height:88px;
     }
+
+    .weather-forecast-data{
+      text-align: center;
+      color:rgb(245, 155, 94);
+      font-size:16px;
+      line-height:20px;
+      font-weight:500;
+    }
+
+    .weather-forecast-icon{
+      text-align:center;
+      font-size:38px;
+    }
+
+    .weather-forecast-temps{
+      text-align:center;
+      font-size:16px;
+      color:rgb(245, 155, 94);
+    }
+
+    .weather-forecast-temp-max{
+      font-weight:bold;
+    }
+
+    
