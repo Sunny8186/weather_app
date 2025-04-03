@@ -79,3 +79,30 @@ function formatDate(date){
 }
 
 searchCity("London");
+
+let forecast = document.querySelector("#forecast");
+
+forecast.innerHTML =
+`<div class="weather-forecast-day">
+    <div class="weather-forecast-date"> ${day} </div>
+        <div class="weather-forecast-icon"></div>
+            <div class="weather-forecast-temps">
+            <span class="weather-forecast-temp-max"> 19° </span>
+        </div>
+</div>`;
+
+displayForecast(){
+    let forecast = document.querySelector("#forecast");
+
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let forecastHTML = "";
+
+    days.forEach(function(day)
+        forecastHTML = 
+            `<div class"weather-forecast-day">`);
+
+        forecast.innerHTML = forecastHTML;
+}
+
+
+
