@@ -61,18 +61,18 @@ function Capitalizing(){
 }
 
 function formatDate(date){
-    let day = date.getDay();
+
+    let minutes = date.getMinutes();
+    let hours = date.getHours()
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let day = days[date.getDay()];
+    const ampen = hours >= 12 ? `PM` : `Am`;
+    hours = hours % 12;
+    hours = hours ? hours : 12;
 
     if(minutes < 10){
         minutes =`0${minutes}`;
     }
-
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    timeElement.innerHTML = formatDate(date);
 
     return `${days}, ${hours}: ${minutes}`;
 
@@ -91,18 +91,39 @@ forecast.innerHTML =
         </div>
 </div>`;
 
-displayForecast(){
+function displayForecast(response){
     let forecast = document.querySelector("#forecast");
 
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let forecastHTML = "";
 
-    days.forEach(function(day)
+    days.forEach(function(day){
         forecastHTML = 
-            `<div class"weather-forecast-day">`);
+            `<div class"weather-forecast-day">
+
+            <div class="weather-forecast-date"> ${dayName} </div>
+            <div class="weather-forecast-icon"> 
+            <img src="${day.condition.icon_url}" alt="${day.condition.description}" class="weather-forecast-icon-img"/>
+            </div>
+            <dic class="weather-forecast-temps"> 
+            <span class="weathe-forecast-temp-max">${Math.round(day.temperature.maximum)}°C </span>
+            <span class="weathe-forecast-temp-min">${Math.round(day.temperature.minimum)}°C </span>
+            </div>
+            </div>`;
+}
+);
 
         forecast.innerHTML = forecastHTML;
 }
+displayForecast();
+
+/*days.forEach(function(day)){
+    forecastHTML = forecastHTML +
+}
 
 
-
+function getforecast(city) {
+    let apiKey ="a3o950fc274347n6a44ft08a3cb0";
+    let apiURL = `http://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}$units= axios(apiUrl).then(displayForecast);
+}
+*/
