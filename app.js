@@ -127,3 +127,24 @@ function getforecast(city) {
     let apiURL = `http://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}$units= axios(apiUrl).then(displayForecast);
 }
 */
+
+function getCurrentLocation(event){
+    event.preventDefault();
+
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(retrievePosition, handleError);
+    }else{
+        alert("Geolocation is not supported by your browser");
+    }
+}
+
+function retrievePosition(position){
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+
+    let apiKey ="a3o950fc274347n6a44ft08a3cb0";
+    let apiURL = `http://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}$units= axios(apiUrl).then(displayForecast)`;
+
+    axios.get(apiURL).then(updateWeatherInfo);
+}
+
