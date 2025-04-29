@@ -25,8 +25,9 @@ function updateWeatherInfo(response) {
     console.log(response.data.condition.description);
 
     let temperatureElement = document.querySelector("#temperature");
-    let temperature = response.data.temperature.current; 
+    let celsiusTemperature = response.data.temperature.current; 
     let cityElement = document.querySelector("#city");
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
     let descriptionElement = document.querySelector("#description");
 
     cityElement.innerHTML = response.data.city;
@@ -147,4 +148,14 @@ function retrievePosition(position){
 
     axios.get(apiURL).then(updateWeatherInfo);
 }
+
+function handleError(error) {
+    alert("Unable to retrieve your location. PLease check your browser settings");
+}
+
+const locationButton = document.querySelector("location-button");
+locationButton.addEventListener("click", getCurrentLocation);
+
+let celsiusTemperature = null;
+
 
