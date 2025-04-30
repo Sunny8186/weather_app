@@ -93,7 +93,10 @@ forecast.innerHTML =
 </div>`;
 
 function displayForecast(response){
-    let forecast = document.querySelector("#forecast");
+    let forecastElement = document.querySelector("#forecast");
+    let forecast = response.data.daily;
+    forecastTemperature = [];
+    console.log(forecast);
 
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let forecastHTML = "";
@@ -117,17 +120,6 @@ function displayForecast(response){
         forecast.innerHTML = forecastHTML;
 }
 displayForecast();
-
-/*days.forEach(function(day)){
-    forecastHTML = forecastHTML +
-}
-
-
-function getforecast(city) {
-    let apiKey ="a3o950fc274347n6a44ft08a3cb0";
-    let apiURL = `http://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}$units= axios(apiUrl).then(displayForecast);
-}
-*/
 
 function getCurrentLocation(event){
     event.preventDefault();
@@ -157,5 +149,39 @@ const locationButton = document.querySelector("location-button");
 locationButton.addEventListener("click", getCurrentLocation);
 
 let celsiusTemperature = null;
+let forecastTemperature = [];
 
+celsiusLink.classList.remove("active");
+celsiusLink.classList.add("inactive");
+fahrenheitLink.classList.remove("inactive");
+fahrenheitLink.classList.add("active");
+
+forecast.forEach(function (day,index){
+    if(index < 5){
+
+        let date = new Date(day.time * 1000);
+        let dayName = days[date.getDay()];
+
+        forecastTemperature.push({
+            max: day.temperature.maximum,
+            min: day.temperature.minimum,
+        });
+    }
+});
+
+function convertToFahrenheit(event){
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    let fahrenheitTemperature = (celsiusTemperature * 9/5) + 32;
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+    let forecastElement = document.querySelectorAll("weather-forecast-temps");
+    forecastElement.forEach(function (temp, index) {
+        let maxTemp = (temp.max * 9/5) + 32;
+        let minTemp = (temp.min * 9/5) + 32;
+        forecastElements[index].innerHTML = `
+        <span class="weather-forecast-temp-max">${Math.round(maxTemp)}°F</span>
+        <span class="weather-forecast-temp-min">${Math.round(minTemp)}°F</span>`;
+    });
+}
 
