@@ -103,13 +103,70 @@
     }
 
     .weather-forecast-temps{
-      text-align:center;
-      font-size:16px;
-      color:rgb(245, 155, 94);
+      font-size: 12px;
+      color: #333; /* Neutral color for text */
+      display: flex; /* Use flexbox to align min and max temperatures horizontally */
+      justify-content: center; /* Center the temperatures horizontally */
+      gap: 5px; /* Add spacing between min and max temperatures */
     }
 
     .weather-forecast-temp-max{
-      font-weight:bold;
+      font-weight: bold;
+      color: #ff4500; /* Max temp color */
     }
 
-    
+    .weather-forecast-temp-min{
+      color: #1e90ff; /* Min temp color */
+    }
+
+    /* Container for the forecast days */
+    .weather-forecast-container {
+        display: flex;
+        justify-content: space-around; /* Evenly space the forecast days */
+        align-items: center; /* Align items vertically */
+        margin-top: 20px;
+        padding: 10px 0; /* Add padding inside the container */
+        border-radius: 10px; /* Optional: Add rounded corners */
+    }
+
+    /* Individual forecast day styling */
+    .weather-forecast-day {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        text-align: center;
+        width: 60px; /* Set a fixed width for each day */
+    }
+
+    /* Day name styling */
+    .weather-forecast-date {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px; /* Add spacing below the day name */
+    }
+
+    /* Weather icon styling */
+    .weather-forecast-icon img {
+        width: 35px; /* Reduce size of the weather icon */
+        height: 35px;
+        margin: 5px 0; /* Adjust spacing around the icon */
+    }
+
+    /* Temperature styling */
+    .weather-forecast-temps {
+        font-size: 12px;
+        color: #333; /* Neutral color for text */
+        display: flex; /* Use flexbox to align min and max temperatures horizontally */
+        justify-content: center; /* Center the temperatures horizontally */
+        gap: 5px; /* Add spacing between min and max temperatures */
+    }
+
+    .weather-forecast-temp-max {
+        font-weight: bold;
+        color: #ff4500; /* Max temp color */
+    }
+
+    .weather-forecast-temp-min {
+        color: #1e90ff; /* Min temp color */
+    }
+

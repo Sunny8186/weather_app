@@ -27,11 +27,10 @@ function updateWeatherInfo(response) {
     let temperatureElement = document.querySelector("#temperature");
     let celsiusTemperature = response.data.temperature.current; 
     let cityElement = document.querySelector("#city");
-    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+    temperatureElement.innerHTML = Math.round(celsiusTemperature) + `°C`;
     let descriptionElement = document.querySelector("#description");
 
     cityElement.innerHTML = response.data.city;
-    temperatureElement.innerHTML = Math.round(temperature) + `°C`;
     descriptionElement.innerHTML = response.data.condition.description;
 
     let humidityElement = document.querySelector("#humidity");
@@ -53,7 +52,7 @@ function Capitalizing(){
     let description = response.data.condition.description;
     description = description
     .split("")
-    .map(word => word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join("");
 
     descriptionElement.innerHTML =  description;
@@ -92,34 +91,34 @@ forecast.innerHTML =
         </div>
 </div>`;
 
-function displayForecast(response){
-    let forecastElement = document.querySelector("#forecast");
-    let forecast = response.data.daily;
-    forecastTemperature = [];
-    console.log(forecast);
-
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+function displayForecast(response) {
+    let forecastElement = document.querySelector(".weather-forecast-container");
+    let forecast = response.data.daily; // Assuming the API provides a 'daily' array for the forecast
     let forecastHTML = "";
 
-    days.forEach(function(day){
-        forecastHTML = 
-            `<div class"weather-forecast-day">
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-            <div class="weather-forecast-date"> ${dayName} </div>
-            <div class="weather-forecast-icon"> 
-            <img src="${day.condition.icon_url}" alt="${day.condition.description}" class="weather-forecast-icon-img"/>
-            </div>
-            <dic class="weather-forecast-temps"> 
-            <span class="weathe-forecast-temp-max">${Math.round(day.temperature.maximum)}°C </span>
-            <span class="weathe-forecast-temp-min">${Math.round(day.temperature.minimum)}°C </span>
-            </div>
-            </div>`;
-}
-);
+    forecast.forEach(function (day, index) {
+        if (index < 5) { // Limit to 5 days
+            let date = new Date(day.time * 1000); // Convert timestamp to date
+            let dayName = days[date.getDay()]; // Get the day name
 
-        forecast.innerHTML = forecastHTML;
+            forecastHTML += `
+                <div class="weather-forecast-day">
+                    <div class="weather-forecast-date">${dayName}</div>
+                    <div class="weather-forecast-icon">
+                        <img src="${day.condition.icon_url}" alt="${day.condition.description}" />
+                    </div>
+                    <div class="weather-forecast-temps">
+                        <span class="weather-forecast-temp-max">${Math.round(day.temperature.maximum)}°</span>
+                        <span class="weather-forecast-temp-min">${Math.round(day.temperature.minimum)}°</span>
+                    </div>
+                </div>`;
+        }
+    });
+
+    forecastElement.innerHTML = forecastHTML;
 }
-displayForecast();
 
 function getCurrentLocation(event){
     event.preventDefault();
